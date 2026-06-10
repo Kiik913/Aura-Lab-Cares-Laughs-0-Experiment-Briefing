@@ -83,7 +83,7 @@ Aura Lab remembers more than you think.
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Kiik913/Aura-Lab-Cares-Laughs-0-Experiment-Briefing
+ git clone https://github.com/Kiik913/Aura-Lab-Cares-Laughs-0-Experiment-Briefing.git
    ```
 2. Open `index.html` in your browser, or use a local server:
    ```bash
