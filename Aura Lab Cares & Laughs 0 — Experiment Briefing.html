@@ -1,0 +1,2322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Aura Lab: Cares & Laughs 0 ($VG + Hearts + Secret Ending)</title>
+
+  <!-- Internal CSS -->
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: radial-gradient(circle at top, #1e293b 0, #020617 45%, #000 100%);
+      color: #e5e7eb;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 820px;
+      padding: 1.6rem;
+      border-radius: 1rem;
+      background: rgba(15, 23, 42, 0.95);
+      box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.9),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header {
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .title-wrap {
+      max-width: 70%;
+    }
+
+    .title {
+      font-size: 1.7rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 0.35rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      background: rgba(56, 189, 248, 0.15);
+      color: #7dd3fc;
+      border: 1px solid rgba(56, 189, 248, 0.5);
+    }
+
+    .date-time {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-top: 0.25rem;
+    }
+
+    .difficulty-box {
+      min-width: 190px;
+      padding: 0.5rem 0.7rem;
+      border-radius: 0.6rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 0.8rem;
+    }
+
+    .difficulty-title {
+      font-size: 0.8rem;
+      margin-bottom: 0.2rem;
+      color: #cbd5f5;
+    }
+
+    .difficulty-note {
+      font-size: 0.7rem;
+      color: #64748b;
+      margin-top: 0.2rem;
+    }
+
+    .panel {
+      margin-top: 1.25rem;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+    }
+
+    .panel-title {
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      color: #e5e7eb;
+    }
+
+    .fun-text {
+      font-size: 0.9rem;
+      color: #cbd5f5;
+      min-height: 2.5rem;
+    }
+
+    .btn-row {
+      margin-top: 0.9rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 0.5rem 0.9rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition:
+        transform 0.1s ease,
+        box-shadow 0.15s ease,
+        background 0.15s ease;
+    }
+
+    .btn-main {
+      background: linear-gradient(135deg, #22c55e, #4ade80);
+      color: #022c22;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
+    }
+
+    .btn-main:active {
+      transform: translateY(1px);
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.35);
+    }
+
+    .btn-secondary {
+      background: rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    .btn-secondary:active {
+      transform: translateY(1px);
+      box-shadow: none;
+    }
+
+    .btn-escape {
+      background: linear-gradient(135deg, #f97373, #f97316);
+      color: #111827;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(248, 113, 113, 0.4);
+    }
+
+    .btn-escape[disabled] {
+      opacity: 0.4;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .level-panel {
+      margin-top: 1rem;
+      padding: 0.8rem 1rem;
+      border-radius: 0.75rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(94, 234, 212, 0.4);
+    }
+
+    .level-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      margin-bottom: 0.4rem;
+      color: #a5f3fc;
+    }
+
+    .level-bar {
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 1);
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(45, 212, 191, 0.5);
+    }
+
+    .level-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #22c55e, #a855f7, #38bdf8);
+      transition: width 0.25s ease;
+    }
+
+    .surprise {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: #facc15;
+      min-height: 1.2rem;
+    }
+
+    .challenge-info {
+      margin-top: 0.35rem;
+      font-size: 0.78rem;
+      color: #e5e7eb;
+      min-height: 1.1rem;
+    }
+
+    .challenge-fail {
+      color: #f97373;
+      font-size: 0.78rem;
+      margin-top: 0.2rem;
+      min-height: 1rem;
+    }
+
+    .rewards-panel {
+      margin-top: 1rem;
+      padding: 0.9rem 1rem;
+      border-radius: 0.75rem;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(129, 140, 248, 0.5);
+    }
+
+    .reward-list {
+      margin-top: 0.4rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    .reward-item {
+      padding: 0.45rem 0.6rem;
+      border-radius: 0.6rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .reward-item.locked {
+      opacity: 0.4;
+      filter: grayscale(1);
+    }
+
+    .reward-title {
+      font-weight: 600;
+      font-size: 0.78rem;
+    }
+
+    .reward-desc {
+      font-size: 0.7rem;
+      color: #9ca3af;
+    }
+
+    .reward-link {
+      margin-top: 0.18rem;
+      font-size: 0.75rem;
+      color: #38bdf8;
+      text-decoration: underline;
+    }
+
+    .reward-lock {
+      font-size: 0.7rem;
+      color: #f97316;
+    }
+
+    .footer {
+      margin-top: 1.1rem;
+      font-size: 0.75rem;
+      color: #64748b;
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .counter {
+      color: #a5b4fc;
+      font-weight: 500;
+    }
+
+    .overlay-panel {
+      position: absolute;
+      inset: 0.5rem;
+      border-radius: 0.75rem;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9);
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .overlay-hidden {
+      display: none;
+    }
+
+    .shake {
+      animation: tilt-n-move-shaking 0.4s ease-in-out;
+    }
+
+    @keyframes tilt-n-move-shaking {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(4px, 2px) rotate(3deg); }
+      50% { transform: translate(0, 0) rotate(0deg); }
+      75% { transform: translate(-4px, 2px) rotate(-3deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+
+    body.glitch .app {
+      filter: hue-rotate(12deg) contrast(1.2) saturate(1.05);
+    }
+
+    /* Intro cards layout */
+    .intro-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-top: 0.4rem;
+    }
+
+    .intro-card {
+      background: rgba(15, 23, 42, 0.98);
+      border-radius: 0.75rem;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      padding: 0.8rem 0.9rem;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.55);
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .intro-card-wide {
+      grid-column: span 3;
+    }
+
+    .intro-icon {
+      font-size: 1.4rem;
+    }
+
+    .intro-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .intro-body {
+      font-size: 0.8rem;
+      color: #cbd5f5;
+    }
+
+    .intro-list {
+      list-style: none;
+      margin: 0.1rem 0 0;
+      padding: 0;
+      font-size: 0.78rem;
+      color: #9ca3af;
+    }
+
+    .intro-list li {
+      margin-bottom: 0.18rem;
+    }
+
+    .intro-footer-text {
+      margin-top: 0.9rem;
+      font-size: 0.82rem;
+      color: #e5e7eb;
+    }
+
+    @media (max-width: 640px) {
+      .app {
+        margin: 0 0.8rem;
+        padding: 1.1rem;
+      }
+
+      .title-wrap {
+        max-width: 100%;
+      }
+
+      .title {
+        font-size: 1.4rem;
+      }
+
+      .reward-list {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+
+      .intro-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .intro-card-wide {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <!-- INTRO SCREEN -->
+    <div id="intro-screen" class="overlay-panel">
+      <div class="panel-title">Aura Lab: Cares & Laughs 0 — Experiment Briefing</div>
+      <div class="fun-text" id="intro-text">
+        <div class="intro-grid">
+          <!-- Card 1: What is this -->
+          <div class="intro-card">
+            <div class="intro-icon">🧪</div>
+            <div class="intro-title">What this is</div>
+            <div class="intro-body">
+              Tiny lab experiment where your brain farms <b>$VG</b> (Vibes Generated), <b>XP</b>, and <b>hearts</b> while the game quietly turns more evil.
+            </div>
+            <ul class="intro-list">
+              <li>Clicker core → generate vibes.</li>
+              <li>Auto‑difficulty from easy to hard.</li>
+              <li>Hidden Level 100 “game died” ending.</li>
+            </ul>
+          </div>
+
+          <!-- Card 2: Core systems -->
+          <div class="intro-card">
+            <div class="intro-icon">⚙️</div>
+            <div class="intro-title">Core systems</div>
+            <div class="intro-body">
+              Everything you do feeds a few main systems that decide how nice or cruel Aura Lab feels.
+            </div>
+            <ul class="intro-list">
+              <li><b>Vibes & $VG:</b> each good click shows a random line and gives $VG. Some vibe milestones drop bonuses.</li>
+              <li><b>Levels & XP:</b> XP rules get weirder as difficulty rises; level up → bigger XP bar and meaner game.</li>
+              <li><b>Timer & hearts:</b> each level has a countdown. Hit 0 or go AFK too long = lose a heart.</li>
+            </ul>
+          </div>
+
+          <!-- Card 3: Upgrades -->
+          <div class="intro-card">
+            <div class="intro-icon">🛒</div>
+            <div class="intro-title">Upgrades shop</div>
+            <div class="intro-body">
+              Spend $VG to bend the rules instead of suffering them.
+            </div>
+            <ul class="intro-list">
+              <li><b>Extra Hearts:</b> more lives (up to 6), price climbs each time.</li>
+              <li><b>Time Bender:</b> adds seconds to the level timer.</li>
+              <li><b>Brain Overclock:</b> extra XP per click, stacks up to +3.</li>
+              <li><b>Background Vibes:</b> passive $VG per second.</li>
+              <li><b>Heart Shield:</b> blocks the next heart loss.</li>
+              <li><b>Pro Aura Lab:</b> 600 $VG flex; timer + XP buff and PRO title.</li>
+            </ul>
+          </div>
+
+          <!-- Card 4: Secrets & progress -->
+          <div class="intro-card intro-card-wide">
+            <div class="intro-icon">🕵️‍♂️</div>
+            <div class="intro-title">Secrets & progress</div>
+            <div class="intro-body">
+              Aura Lab remembers more than you think.
+            </div>
+            <ul class="intro-list">
+              <li><b>Rage Quit:</b> unlocks all external rewards once per tab, then gets permanently disabled.</li>
+              <li><b>Secret code:</b> certain keyboard sequences (like “AURA”) can instantly unlock everything.</li>
+              <li><b>Level 100:</b> triggers a glitchy ending and credits screen.</li>
+              <li><b>Runs:</b> Reset or Game Over wipes the run but your total $VG in this tab stays.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="intro-footer-text">
+          When you’re ready, hit <b>“Start the experiment”</b> and see how far your hearts, timer, and patience go before everything breaks.
+        </div>
+      </div>
+      <div class="btn-row" style="margin-top: 0.9rem;">
+        <button id="btn-intro-start" class="btn-main">🎬 Start the experiment</button>
+      </div>
+    </div>
+
+    <!-- CREDITS SCREEN -->
+    <div id="credits-screen" class="overlay-panel overlay-hidden">
+      <div class="panel-title">Aura Lab: Cares & Laughs 0 — Credits</div>
+      <div class="fun-text" id="credits-text">
+        Experiment terminated.<br /><br />
+        <b>Thanks for playing, Kavyant.</b><br /><br />
+        Designed & coded by: <b>Kavyant</b><br />
+        Game mode: vibes, $VG (Vibes Generated), hearts, and questionable choices.<br />
+        Special thanks: your stubborn brain for reaching Level 100.<br /><br />
+        Final message from Aura Lab:<br />
+        <i>"My hearts are low, and it's getting dark in here."</i><br /><br />
+        Aura Lab will now rest. You can, however, reset the universe and do it all again for no reason.
+      </div>
+      <div class="btn-row" style="margin-top: 0.9rem;">
+        <button id="btn-credits-reset" class="btn-secondary">🔁 Reset universe</button>
+      </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <div class="header">
+      <div class="title-wrap">
+        <div class="title">Aura Lab: Cares & Laughs 0</div>
+        <div class="subtitle" id="subtitle">
+          Hearts, timers, $VG (Vibes Generated), and chaos. Lose all hearts or hit Level 100 = GAME DIED (Reset to revive).
+        </div>
+        <div id="date-time" class="date-time"></div>
+        <span class="tag">Made by Kavyant · VS Code + Live Server</span>
+      </div>
+      <div class="difficulty-box">
+        <div class="difficulty-title">Difficulty (auto)</div>
+        <div id="difficulty-text">EASY</div>
+        <div class="difficulty-note">Game ramps up as you keep clicking.</div>
+      </div>
+    </div>
+
+    <!-- Vibe generator panel -->
+    <div class="panel">
+      <div class="panel-title">Today’s random vibe:</div>
+      <div id="fun-text" class="fun-text">
+        Click "Generate vibe" to begin your Aura Lab journey.
+      </div>
+
+      <div class="btn-row">
+        <button id="btn-vibe" class="btn-main">⚡ Generate vibe</button>
+        <button id="btn-reset" class="btn-secondary">♻ Reset (Always Safe)</button>
+        <button id="btn-escape" class="btn-escape">🚪 Rage Quit (Cheat Unlock)</button>
+      </div>
+    </div>
+
+    <!-- Level & challenge panel -->
+    <div class="level-panel">
+      <div class="level-header">
+        <span>Level: <span id="level">1</span></span>
+        <span>XP: <span id="xp">0</span> / <span id="xp-max">5</span></span>
+      </div>
+
+      <div class="level-header">
+        <span>Time left: <span id="level-timer">20</span>s</span>
+        <span>Hearts: <span id="hearts">❤️❤️❤️❤️</span></span>
+      </div>
+
+      <div class="level-bar">
+        <div id="level-fill" class="level-fill"></div>
+      </div>
+      <div id="surprise" class="surprise"></div>
+      <div id="challenge-info" class="challenge-info"></div>
+      <div id="challenge-fail" class="challenge-fail"></div>
+    </div>
+
+    <!-- Rewards / links + upgrades panel -->
+    <div class="rewards-panel">
+      <div class="panel-title">Rewards, Links & Upgrades ($VG = Vibes Generated)</div>
+
+      <div class="reward-list">
+        <div class="reward-item" data-min-level="1">
+          <div class="reward-title">Aura Lab: Cares & Laughs 1</div>
+          <div class="reward-desc">Level 1 reward: your first Aura Lab experiment.</div>
+          <a
+            class="reward-link"
+            href="https://codepen.io/Kavyant-Kumar/pen/dPGJPKj"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open CodePen
+          </a>
+        </div>
+
+        <div class="reward-item locked" data-min-level="2">
+          <div class="reward-title">Aura Lab: Cares & Laughs 2</div>
+          <div class="reward-desc">Level 2 reward: another CodePen creation.</div>
+          <a
+            class="reward-link"
+            href="https://codepen.io/Kavyant-Kumar/pen/dPOXwmY"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open CodePen
+          </a>
+          <div class="reward-lock">Unlocks at Level 2</div>
+        </div>
+
+        <div class="reward-item locked" data-min-level="3">
+          <div class="reward-title">Instagram · @kavyanthub</div>
+          <div class="reward-desc">Level 3 reward: Insta portal opens.</div>
+          <a
+            class="reward-link"
+            href="https://www.instagram.com/kavyanthub/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open Instagram
+          </a>
+          <div class="reward-lock">Unlocks at Level 3</div>
+        </div>
+
+        <div class="reward-item locked" data-min-level="4">
+          <div class="reward-title">Facebook Profile</div>
+          <div class="reward-desc">Level 4 reward: unlock FB profile.</div>
+          <a
+            class="reward-link"
+            href="https://www.facebook.com/profile.php?id=61586003535719"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open Facebook
+          </a>
+          <div class="reward-lock">Unlocks at Level 4</div>
+        </div>
+
+        <div class="reward-item locked" data-min-level="5">
+          <div class="reward-title">GitHub · Kiik913</div>
+          <div class="reward-desc">Level 5 reward: see your code lair.</div>
+          <a
+            class="reward-link"
+            href="https://github.com/Kiik913"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open GitHub
+          </a>
+          <div class="reward-lock">Unlocks at Level 5</div>
+        </div>
+
+        <div class="reward-item locked" data-min-level="6">
+          <div class="reward-title">YouTube · Care Lab Studio</div>
+          <div class="reward-desc">Level 6 reward: YouTube portal opens.</div>
+          <a
+            class="reward-link"
+            href="https://www.youtube.com/@CareLabStudio"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open YouTube
+          </a>
+          <div class="reward-lock">Unlocks at Level 6</div>
+        </div>
+
+        <!-- Upgrade: Extra Hearts -->
+        <div class="reward-item" data-min-level="1">
+          <div class="reward-title">Upgrade: Extra Hearts</div>
+          <div class="reward-desc" id="heart-upgrade-desc">
+            Costs 20 $VG (Vibes Generated). Adds +1 heart. Max hearts: 6.
+          </div>
+          <button id="btn-buy-heart" class="btn-secondary">💗 Buy Extra Heart</button>
+          <div class="reward-lock" id="heart-upgrade-status">Available</div>
+        </div>
+
+        <!-- New Upgrade: Time Bender -->
+        <div class="reward-item locked" data-min-level="3">
+          <div class="reward-title">Upgrade: Time Bender</div>
+          <div class="reward-desc" id="time-upgrade-desc">
+            Adds extra seconds to the level timer. Level 0/3. Next cost: 40 $VG.
+          </div>
+          <button id="btn-buy-time" class="btn-secondary">⏳ Buy Time Bender</button>
+          <div class="reward-lock" id="time-upgrade-status">Unlocks at Level 3</div>
+        </div>
+
+        <!-- New Upgrade: Brain Overclock -->
+        <div class="reward-item locked" data-min-level="5">
+          <div class="reward-title">Upgrade: Brain Overclock</div>
+          <div class="reward-desc" id="xp-upgrade-desc">
+            +1 XP per successful click (stackable up to +3). Next cost: 50 $VG.
+          </div>
+          <button id="btn-buy-xp" class="btn-secondary">🧠 Buy Brain Overclock</button>
+          <div class="reward-lock" id="xp-upgrade-status">Unlocks at Level 5</div>
+        </div>
+
+        <!-- New Upgrade: Background Vibes -->
+        <div class="reward-item locked" data-min-level="8">
+          <div class="reward-title">Upgrade: Background Vibes</div>
+          <div class="reward-desc" id="passive-upgrade-desc">
+            +1 $VG per second per level (max 3). Next cost: 80 $VG.
+          </div>
+          <button id="btn-buy-passive" class="btn-secondary">🌙 Buy Background Vibes</button>
+          <div class="reward-lock" id="passive-upgrade-status">Unlocks at Level 8</div>
+        </div>
+
+        <!-- New Upgrade: Heart Shield -->
+        <div class="reward-item locked" data-min-level="4">
+          <div class="reward-title">Upgrade: Heart Shield</div>
+          <div class="reward-desc" id="shield-upgrade-desc">
+            Blocks the next heart loss (timer or idle). Shields: 0. Next cost: 35 $VG.
+          </div>
+          <button id="btn-buy-shield" class="btn-secondary">🛡 Buy Heart Shield</button>
+          <div class="reward-lock" id="shield-upgrade-status">Unlocks at Level 4</div>
+        </div>
+
+        <!-- New Upgrade: Pro Aura Lab -->
+        <div class="reward-item locked" data-min-level="4">
+          <div class="reward-title">Pro Aura Lab: Cares & Laughs 0</div>
+          <div class="reward-desc" id="pro-upgrade-desc">
+            Costs 600 $VG. Permanently buffs timer & XP and flexes your title.
+          </div>
+          <button id="btn-buy-pro" class="btn-secondary">💼 Unlock Pro Aura Lab</button>
+          <div class="reward-lock" id="pro-upgrade-status">Unlocks at Level 4</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span class="counter">$VG (Vibes Generated): <span id="vibe-count">0</span></span>
+      <span>Aura Lab: your brain farms $VG (Vibes Generated), hearts keep you alive. Lose all hearts or hit 100 = Game Died.</span>
+    </div>
+  </div>
+
+  <!-- Internal JS -->
+  <script>
+    // date/time clock
+    const dateTimeEl = document.getElementById("date-time");
+    function updateDateTime() {
+      const now = new Date();
+      const options = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+      };
+      dateTimeEl.textContent = now.toLocaleString("en-US", options);
+    }
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+
+    const funText = document.getElementById("fun-text");
+    const btnVibe = document.getElementById("btn-vibe");
+    const btnReset = document.getElementById("btn-reset");
+    const btnEscape = document.getElementById("btn-escape");
+    const vibeCountEl = document.getElementById("vibe-count");
+
+    const levelEl = document.getElementById("level");
+    const xpEl = document.getElementById("xp");
+    const xpMaxEl = document.getElementById("xp-max");
+    const levelFill = document.getElementById("level-fill");
+    const surpriseEl = document.getElementById("surprise");
+
+    const challengeInfoEl = document.getElementById("challenge-info");
+    const challengeFailEl = document.getElementById("challenge-fail");
+    const difficultyText = document.getElementById("difficulty-text");
+
+    const levelTimerEl = document.getElementById("level-timer");
+    const heartsEl = document.getElementById("hearts");
+
+    const rewardItems = document.querySelectorAll(".reward-item");
+    const btnBuyHeart = document.getElementById("btn-buy-heart");
+    const heartUpgradeStatus = document.getElementById("heart-upgrade-status");
+    const heartUpgradeDesc = document.getElementById("heart-upgrade-desc");
+
+    const btnBuyTime = document.getElementById("btn-buy-time");
+    const timeUpgradeStatus = document.getElementById("time-upgrade-status");
+    const timeUpgradeDesc = document.getElementById("time-upgrade-desc");
+
+    const btnBuyXP = document.getElementById("btn-buy-xp");
+    const xpUpgradeStatus = document.getElementById("xp-upgrade-status");
+    const xpUpgradeDesc = document.getElementById("xp-upgrade-desc");
+
+    const btnBuyPassive = document.getElementById("btn-buy-passive");
+    const passiveUpgradeStatus = document.getElementById("passive-upgrade-status");
+    const passiveUpgradeDesc = document.getElementById("passive-upgrade-desc");
+
+    const btnBuyShield = document.getElementById("btn-buy-shield");
+    const shieldUpgradeStatus = document.getElementById("shield-upgrade-status");
+    const shieldUpgradeDesc = document.getElementById("shield-upgrade-desc");
+
+    const btnBuyPro = document.getElementById("btn-buy-pro");
+    const proUpgradeStatus = document.getElementById("pro-upgrade-status");
+    const proUpgradeDesc = document.getElementById("pro-upgrade-desc");
+
+    const subtitleEl = document.getElementById("subtitle");
+
+    const introScreen = document.getElementById("intro-screen");
+    const btnIntroStart = document.getElementById("btn-intro-start");
+
+    const creditsScreen = document.getElementById("credits-screen");
+    const btnCreditsReset = document.getElementById("btn-credits-reset");
+
+    function shakeElement(el) {
+      if (!el) return;
+      el.classList.remove("shake");
+      void el.offsetWidth;
+      el.classList.add("shake");
+    }
+
+    function setSlowText(element, text) {
+      element.textContent = "";
+      setTimeout(() => {
+        element.textContent = text;
+      }, 250);
+    }
+
+    const vibes = [
+      "You just debugged 3 bugs by thinking about snacks.",
+      "Somewhere, a semicolon is missing and you can feel it.",
+      "Your code is 90% working. The remaining 10% is 'why'.",
+      "You are not stuck. You are loading… (please wait).",
+      "Current mood: console.log('I tried');",
+      "AI + you = chaos, but fun chaos.",
+      "Live Server: F5 in human form.",
+      "Today’s forecast: 80% chance of coding, 20% chance of memes.",
+      "Pro tip: if it works, don’t touch it. If it breaks, blame cache.",
+      "Achievement unlocked: wrote code that worked on first try (in your dreams).",
+      "Bug status: reproduced. Developer status: emotionally damaged.",
+      "Your brain: 16GB RAM. Your browser: 47 tabs, 0 mercy.",
+      "You pressed Ctrl+S. Somewhere, a Live Server smiled.",
+      "Legend says the perfect CSS layout exists. We keep searching.",
+      "Congratulations! You have reached: Senior Vibe Engineer."
+    ];
+
+    const distractions = [
+      "New notification: 0 people are watching you click this button.",
+      "Reminder: You opened VS Code to 'do serious work'. Sure.",
+      "Breaking news: Aura Lab confirms you are 90% vibes, 10% code.",
+      "Alert: You almost did something productive. Almost.",
+      "Tip: The more you click, the less you remember why you started.",
+      "Somewhere, your to‑do list is crying softly.",
+      "You just lost 3 brain cells thinking about that last bug.",
+      "Loading… just kidding, nothing is loading, you are just procrastinating.",
+      "Achievement locked: Touching grass. Requirements: go outside.",
+      "Dev log: Player still clicking the same button, seems happy about it.",
+      "Reminder: $VG cannot be exchanged for real money, only pain.",
+      "Kavyant brain report: 80% stubborn, 20% chaotic genius."
+    ];
+
+    const extraDistractionsOnHard = [
+      "Hard mode reminder: You chose violence. The game is simply cooperating.",
+      "If pain had a UI, it would look like this level.",
+      "Every click here is one less click on real work. Nice.",
+      "Aura Lab fact: The button gets stronger every time you rage.",
+      "You’re on hard difficulty and still here. Respect or concern?",
+      "Kavyant brain has entered 'why are you like this' mode."
+    ];
+
+    const randomEvents = [
+      () => {
+        setSlowText(surpriseEl, "Random event: XP boost! For once, the universe is kind.");
+        addXP(3);
+      },
+      () => {
+        if (level > 1) {
+          setSlowText(
+            surpriseEl,
+            "Random event: tiny nerf. You lost 1 level for absolutely no reason."
+          );
+          level = Math.max(1, level - 1);
+          xp = 0;
+          xpMax = Math.max(5, xpMax - 2);
+          updateUI();
+        } else {
+          setSlowText(
+            surpriseEl,
+            "Random event tried to nerf you, but you are already at rock bottom."
+          );
+        }
+      },
+      () => {
+        setSlowText(
+          surpriseEl,
+          "Random event: button lag spike. Next click will be extra slow."
+        );
+        lagSpikeNextClick = true;
+      },
+      () => {
+        setSlowText(
+          surpriseEl,
+          "Random event: Aura Lab is proud of your persistence, but still not helping."
+        );
+      },
+      () => {
+        if (xp > 0) {
+          const stolen = Math.min(xp, 2);
+          xp -= stolen;
+          updateUI();
+          setSlowText(
+            surpriseEl,
+            "Random event: phantom bug stole " + stolen + " XP. Should’ve committed your progress."
+          );
+          shakeElement(levelFill);
+        } else {
+          setSlowText(
+            surpriseEl,
+            "Random event: phantom bug tried to steal XP but found nothing."
+          );
+        }
+      }
+    ];
+
+    // $VG currency
+    let vibeCoins = 0;
+    let totalVGEarned = 0;
+
+    let count = 0;
+    let level = 1;
+    let xp = 0;
+    let xpMax = 5;
+
+    let clickTimeoutId = null;
+    let allUnlocked = false;
+    let lagSpikeNextClick = false;
+
+    // Inactivity timer
+    let idleTimeoutId = null;
+    const IDLE_LIMIT_MS = 5000;
+
+    // Anger level after Rage Quit disabled (used in generate logic)
+    let angryAfterDisable = 0;
+
+    // Rewards hard lock + mercy logic
+    let rewardsHardLocked = false;
+    let mercyGiven = false;
+
+    // mood label
+    let moodLabel = "Chill";
+
+    // secret code: AURA
+    let secretBuffer = "";
+    let secretTimeoutId = null;
+    const SECRET_CODE = "AURA";
+    let secretUsed = false;
+
+    let autoUnlockTimeoutId = null;
+
+    // hearts and per-level timer
+    let hearts = 4;
+    const maxHearts = 6;
+    let levelTimeMax = 20;
+    let levelTimeLeft = levelTimeMax;
+    let levelTimerIntervalId = null;
+
+    // game over / secret ending state
+    let isGameOver = false;
+    let introFinished = false;
+
+    // Rage Quit memory (per tab)
+    let rageQuitUsedEver = false;
+
+    // heart upgrade pricing
+    let heartUpgradeLevel = 0;
+    const heartBaseCost = 20;
+    const heartCostStep = 19;
+
+    function getHeartUpgradeCost() {
+      return heartBaseCost + heartCostStep * heartUpgradeLevel;
+    }
+
+    // NEW UPGRADE STATE
+    // Time Bender
+    let timeLevel = 0;
+    const timeBaseCost = 40;
+
+    function getTimeCost() {
+      return timeBaseCost + 19 * timeLevel;
+    }
+
+    // Brain Overclock
+    let xpBoostLevel = 0;
+    const xpBoostBaseCost = 50;
+    const xpBoostMax = 3;
+
+    function getXPBoostCost() {
+      return xpBoostBaseCost + 19 * xpBoostLevel;
+    }
+
+    // Background Vibes (passive)
+    let passiveLevel = 0;
+    const passiveBaseCost = 80;
+    const passiveMax = 3;
+    let passiveIntervalId = null;
+
+    function getPassiveCost() {
+      return passiveBaseCost + 19 * passiveLevel;
+    }
+
+    // Heart Shield
+    let shields = 0;
+    const shieldBaseCost = 35;
+
+    function getShieldCost() {
+      return shieldBaseCost + 19 * shields;
+    }
+
+    // Pro Aura Lab
+    let proUnlocked = false;
+    const proCost = 600;
+
+    function updateHeartUpgradeText() {
+      const cost = getHeartUpgradeCost();
+      if (hearts >= maxHearts) {
+        heartUpgradeDesc.textContent =
+          "Max hearts (" + maxHearts + ") reached. No more upgrades available.";
+        heartUpgradeStatus.textContent = "Maxed Out";
+        heartUpgradeStatus.style.color = "#22c55e";
+        return;
+      }
+      heartUpgradeDesc.textContent =
+        "Costs " + cost + " $VG (Vibes Generated). Adds +1 heart. Max hearts: " + maxHearts + ".";
+      heartUpgradeStatus.textContent = "Available";
+      heartUpgradeStatus.style.color = "#f97316";
+    }
+
+    function updateTimeUpgradeText() {
+      const maxLevel = 3;
+      if (timeLevel >= maxLevel) {
+        timeUpgradeDesc.textContent = "Time Bender maxed. Level 3/3. Timer fully stretched.";
+        timeUpgradeStatus.textContent = "Maxed Out";
+        timeUpgradeStatus.style.color = "#22c55e";
+        return;
+      }
+      const cost = getTimeCost();
+      timeUpgradeDesc.textContent =
+        "Adds extra seconds to the level timer. Level " +
+        timeLevel +
+        "/" +
+        maxLevel +
+        ". Next cost: " +
+        cost +
+        " $VG.";
+      timeUpgradeStatus.textContent = "Available";
+      timeUpgradeStatus.style.color = "#f97316";
+    }
+
+    function updateXPUpgradeText() {
+      if (xpBoostLevel >= xpBoostMax) {
+        xpUpgradeDesc.textContent = "Brain Overclock maxed. +" + xpBoostLevel + " XP per click.";
+        xpUpgradeStatus.textContent = "Maxed Out";
+        xpUpgradeStatus.style.color = "#22c55e";
+        return;
+      }
+      const cost = getXPBoostCost();
+      xpUpgradeDesc.textContent =
+        "+1 XP per successful click (stackable up to +" +
+        xpBoostMax +
+        "). Current: +" +
+        xpBoostLevel +
+        ". Next cost: " +
+        cost +
+        " $VG.";
+      xpUpgradeStatus.textContent = "Available";
+      xpUpgradeStatus.style.color = "#f97316";
+    }
+
+    function updatePassiveUpgradeText() {
+      if (passiveLevel >= passiveMax) {
+        passiveUpgradeDesc.textContent =
+          "Background Vibes maxed. +" + passiveLevel + " $VG per second.";
+        passiveUpgradeStatus.textContent = "Maxed Out";
+        passiveUpgradeStatus.style.color = "#22c55e";
+        return;
+      }
+      const cost = getPassiveCost();
+      passiveUpgradeDesc.textContent =
+        "+1 $VG per second per level (max " +
+        passiveMax +
+        "). Current: " +
+        passiveLevel +
+        ". Next cost: " +
+        cost +
+        " $VG.";
+      passiveUpgradeStatus.textContent = "Available";
+      passiveUpgradeStatus.style.color = "#f97316";
+    }
+
+    function updateShieldUpgradeText() {
+      const cost = getShieldCost();
+      shieldUpgradeDesc.textContent =
+        "Blocks the next heart loss (timer or idle). Shields: " +
+        shields +
+        ". Next cost: " +
+        cost +
+        " $VG.";
+      shieldUpgradeStatus.textContent = "Available";
+      shieldUpgradeStatus.style.color = "#f97316";
+    }
+
+    function updateProUpgradeText() {
+      if (proUnlocked) {
+        proUpgradeDesc.textContent =
+          "Pro Aura Lab active. Timer buffed, XP buffed, and your title is flexing.";
+        proUpgradeStatus.textContent = "Owned";
+        proUpgradeStatus.style.color = "#22c55e";
+      } else {
+        proUpgradeDesc.textContent =
+          "Costs 600 $VG. Permanently buffs timer & XP and flexes your title.";
+        proUpgradeStatus.textContent = "Available";
+        proUpgradeStatus.style.color = "#f97316";
+      }
+    }
+
+    function updateHeartsUI() {
+      heartsEl.textContent = "❤️".repeat(Math.max(0, hearts));
+      updateHeartUpgradeText();
+    }
+
+    function updateLevelTimerUI() {
+      levelTimerEl.textContent = Math.max(0, levelTimeLeft);
+    }
+
+    function updateVGUI() {
+      vibeCountEl.textContent = vibeCoins;
+    }
+
+    function earnVG(amount = 1) {
+      vibeCoins += amount;
+      totalVGEarned += amount;
+      updateVGUI();
+    }
+
+    function startLevelTimer() {
+      if (levelTimerIntervalId !== null) {
+        clearInterval(levelTimerIntervalId);
+      }
+      levelTimeLeft = levelTimeMax;
+      updateLevelTimerUI();
+
+      levelTimerIntervalId = setInterval(() => {
+        if (isGameOver || !introFinished) {
+          clearInterval(levelTimerIntervalId);
+          levelTimerIntervalId = null;
+          return;
+        }
+        levelTimeLeft--;
+        updateLevelTimerUI();
+
+        if (levelTimeLeft <= 0) {
+          clearInterval(levelTimerIntervalId);
+          levelTimerIntervalId = null;
+          onLevelTimerExpired();
+        }
+      }, 1000);
+    }
+
+    function triggerGameOver(reasonText) {
+      if (isGameOver) return;
+      isGameOver = true;
+      btnEscape.disabled = true;
+      rewardsHardLocked = true;
+      angryAfterDisable = 0;
+
+      setSlowText(
+        surpriseEl,
+        reasonText || "All hearts are gone. Game Over lock."
+      );
+      setSlowText(
+        challengeFailEl,
+        "GAME OVER. All hearts died. Press Reset to start a new run."
+      );
+
+      updateRewards();
+
+      if (levelTimerIntervalId !== null) {
+        clearInterval(levelTimerIntervalId);
+        levelTimerIntervalId = null;
+      }
+      if (clickTimeoutId !== null) {
+        clearTimeout(clickTimeoutId);
+        clickTimeoutId = null;
+      }
+      if (idleTimeoutId !== null) {
+        clearTimeout(idleTimeoutId);
+        idleTimeoutId = null;
+      }
+      if (autoUnlockTimeoutId) {
+        clearTimeout(autoUnlockTimeoutId);
+        autoUnlockTimeoutId = null;
+      }
+      if (passiveIntervalId) {
+        clearInterval(passiveIntervalId);
+        passiveIntervalId = null;
+      }
+    }
+
+    function triggerSecretEnding() {
+      if (isGameOver) return;
+      isGameOver = true;
+      btnEscape.disabled = true;
+      rewardsHardLocked = true;
+
+      if (levelTimerIntervalId !== null) clearInterval(levelTimerIntervalId);
+      if (idleTimeoutId !== null) clearTimeout(idleTimeoutId);
+      if (clickTimeoutId !== null) clearTimeout(clickTimeoutId);
+      if (passiveIntervalId) {
+        clearInterval(passiveIntervalId);
+        passiveIntervalId = null;
+      }
+
+      document.body.classList.add("glitch");
+      shakeElement(funText);
+      shakeElement(levelFill);
+
+      setSlowText(
+        surpriseEl,
+        "LEVEL 100 REACHED. Aura Lab cannot handle this much Kavyant brain."
+      );
+
+      setTimeout(() => {
+        funText.textContent = "S Y S T E M   E R R 0 R . . .";
+      }, 700);
+
+      setTimeout(() => {
+        funText.textContent = "A u r a   L a b   m e m o r y   o v e r f l o w . . .";
+      }, 1500);
+
+      setTimeout(() => {
+        funText.textContent = "C o n n e c t i o n   t o   r e a l i t y   l o s t . . .";
+      }, 2300);
+
+      setTimeout(() => {
+        setSlowText(
+          challengeFailEl,
+          "Final log: my hearts are low and it's getting dark in here."
+        );
+      }, 3200);
+
+      setTimeout(() => {
+        showCreditsScreen();
+      }, 4200);
+    }
+
+    function consumeShieldOrLoseHeart(reasonTextIdleOrTimer) {
+      if (shields > 0) {
+        shields--;
+        updateShieldUpgradeText();
+        setSlowText(
+          surpriseEl,
+          "Heart Shield blocked a heart loss. Shields left: " + shields + "."
+        );
+        return true; // blocked
+      }
+      hearts--;
+      updateHeartsUI();
+      shakeElement(heartsEl);
+      setSlowText(surpriseEl, reasonTextIdleOrTimer);
+      return false; // not blocked
+    }
+
+    function onLevelTimerExpired() {
+      if (isGameOver) return;
+
+      if (hearts > 0) {
+        const blocked = consumeShieldOrLoseHeart(
+          "Timer ran out. You lost a heart!"
+        );
+        if (blocked) {
+          setSlowText(
+            challengeFailEl,
+            "Shield saved you from the timer. Try not to waste it."
+          );
+          startLevelTimer();
+          return;
+        }
+
+        if (hearts > 0) {
+          setSlowText(
+            challengeFailEl,
+            "You still have hearts left. Beat the next timer."
+          );
+          startLevelTimer();
+        } else {
+          triggerGameOver("You ran out of time and hearts. Maximum chaos lock.");
+        }
+      } else {
+        triggerGameOver("You ran out of time and hearts. Maximum chaos lock.");
+      }
+    }
+
+    function startIdleTimer() {
+      if (idleTimeoutId) clearTimeout(idleTimeoutId);
+      idleTimeoutId = setTimeout(() => {
+        if (isGameOver || !introFinished) return;
+
+        if (hearts > 0) {
+          const blocked = consumeShieldOrLoseHeart(
+            "You went idle. The game ate one of your hearts."
+          );
+          if (blocked) {
+            setSlowText(
+              challengeFailEl,
+              "Shield saved you from AFK damage. Touch grass later."
+            );
+            startIdleTimer();
+            return;
+          }
+
+          if (hearts > 0) {
+            startIdleTimer();
+          } else {
+            triggerGameOver("You went idle with no hearts left. Chaos lock activated.");
+          }
+        } else {
+          triggerGameOver("You went idle with no hearts left. Chaos lock activated.");
+        }
+      }, IDLE_LIMIT_MS);
+    }
+
+    function markUserActive() {
+      if (isGameOver || !introFinished) return;
+      startIdleTimer();
+    }
+
+    function randomFrom(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function getDifficulty() {
+      if (level <= 2) return "easy";
+      if (level <= 4) return "medium";
+      return "hard";
+    }
+
+    function updateTitleByLevel() {
+      if (level >= 50) {
+        subtitleEl.textContent = "Title: Aura Lab Final Boss · Hearts, timers, $VG, and pure chaos.";
+      } else if (level >= 20) {
+        subtitleEl.textContent = "Title: Certified Menace · Hearts, timers, $VG, and chaos.";
+      } else if (level >= 10) {
+        subtitleEl.textContent = "Title: Senior Vibe Engineer · Hearts, timers, $VG, and chaos.";
+      } else if (!proUnlocked) {
+        subtitleEl.textContent =
+          "Hearts, timers, $VG (Vibes Generated), and chaos. Lose all hearts or hit Level 100 = GAME DIED (Reset to revive).";
+      }
+    }
+
+    function updateDifficultyUI() {
+      const diff = getDifficulty();
+      difficultyText.textContent = diff.toUpperCase();
+      let info;
+      if (diff === "easy") {
+        info = "Easy: fast-ish, XP often, mostly chill.";
+        moodLabel = "Chill";
+      } else if (diff === "medium") {
+        info = "Medium: delays, random XP loss, more teasing.";
+        moodLabel = "Annoyed";
+      } else {
+        info =
+          "Hard: big delays, weird XP rules, lots of distractions. Aura Lab wants you to stop.";
+        moodLabel = "Evil";
+      }
+      setSlowText(challengeInfoEl, info);
+      difficultyText.title = "Game mood: " + moodLabel;
+    }
+
+    function updateRewards() {
+      rewardItems.forEach((item) => {
+        const minLevel = parseInt(item.getAttribute("data-min-level"), 10);
+        const link = item.querySelector(".reward-link");
+        const lock = item.querySelector(".reward-lock");
+
+        const isHeartUpgradeItem =
+          heartUpgradeStatus && item === heartUpgradeStatus.closest(".reward-item");
+        const isTimeUpgradeItem =
+          timeUpgradeStatus && item === timeUpgradeStatus.closest(".reward-item");
+        const isXPUpgradeItem =
+          xpUpgradeStatus && item === xpUpgradeStatus.closest(".reward-item");
+        const isPassiveUpgradeItem =
+          passiveUpgradeStatus && item === passiveUpgradeStatus.closest(".reward-item");
+        const isShieldUpgradeItem =
+          shieldUpgradeStatus && item === shieldUpgradeStatus.closest(".reward-item");
+        const isProUpgradeItem =
+          proUpgradeStatus && item === proUpgradeStatus.closest(".reward-item");
+
+        const isPureUpgrade =
+          isHeartUpgradeItem ||
+          isTimeUpgradeItem ||
+          isXPUpgradeItem ||
+          isPassiveUpgradeItem ||
+          isShieldUpgradeItem ||
+          isProUpgradeItem;
+
+        if (rewardsHardLocked && !mercyGiven && !allUnlocked && !isPureUpgrade) {
+          item.classList.add("locked");
+          if (lock) {
+            lock.textContent = "Locked. No more shortcuts.";
+            lock.style.color = "#f97316";
+          }
+          if (link) link.dataset.disabled = "true";
+          return;
+        }
+
+        if (!isPureUpgrade) {
+          if (allUnlocked || level >= minLevel) {
+            item.classList.remove("locked");
+            if (lock) {
+              lock.textContent = "Unlocked!";
+              lock.style.color = "#22c55e";
+            }
+            if (link) link.dataset.disabled = "false";
+          } else {
+            item.classList.add("locked");
+            if (lock) {
+              lock.textContent = "Unlocks at Level " + minLevel;
+              lock.style.color = "#f97316";
+            }
+            if (link) link.dataset.disabled = "true";
+          }
+        } else {
+          if (level < minLevel && lock && !item.classList.contains("locked")) {
+            item.classList.add("locked");
+            lock.textContent = "Unlocks at Level " + minLevel;
+            lock.style.color = "#f97316";
+          } else if (level >= minLevel && item.classList.contains("locked")) {
+            item.classList.remove("locked");
+          }
+        }
+      });
+
+      updateHeartUpgradeText();
+      updateTimeUpgradeText();
+      updateXPUpgradeText();
+      updatePassiveUpgradeText();
+      updateShieldUpgradeText();
+      updateProUpgradeText();
+    }
+
+    rewardItems.forEach((item) => {
+      const link = item.querySelector(".reward-link");
+      if (!link) return;
+      link.dataset.disabled = "true";
+      link.addEventListener("click", (e) => {
+        if (link.dataset.disabled === "true") {
+          e.preventDefault();
+        }
+      });
+    });
+
+    function updateUI() {
+      levelEl.textContent = level;
+      xpEl.textContent = xp;
+      xpMaxEl.textContent = xpMax;
+      const percent = (xp / xpMax) * 100;
+      levelFill.style.width = percent + "%";
+      updateDifficultyUI();
+      updateTitleByLevel();
+      updateRewards();
+    }
+
+    function delayForDifficulty() {
+      const diff = getDifficulty();
+      const phase = (count % 20) / 20;
+      const wave = Math.sin(phase * Math.PI * 2);
+      const normalized = (wave + 1) / 2;
+
+      let base;
+      if (diff === "easy") base = 120;
+      else if (diff === "medium") base = 400;
+      else base = 900;
+
+      const extra = normalized * (diff === "hard" ? 1200 : 600);
+      let delay = base + extra;
+
+      if (count > 30) delay += 200;
+      if (count > 60) delay += 400;
+
+      if (lagSpikeNextClick) {
+        delay += 1500;
+        lagSpikeNextClick = false;
+      }
+
+      return delay;
+    }
+
+    function addXP(amount) {
+      if (level >= 100) return;
+
+      xp += amount;
+      if (xp >= xpMax) {
+        xp = 0;
+        level++;
+
+        if (level < 100) {
+          xpMax += 4;
+          setSlowText(
+            surpriseEl,
+            "Level " + level + ": difficulty quietly increased. Aura Lab is judging your decisions."
+          );
+          updateUI();
+        } else if (level === 100) {
+          triggerSecretEnding();
+        }
+      } else {
+        updateUI();
+      }
+    }
+
+    function addXPForDifficulty() {
+      const diff = getDifficulty();
+      const bonus = xpBoostLevel;
+
+      if (diff === "easy") {
+        addXP(1 + bonus);
+        return;
+      }
+
+      if (diff === "medium") {
+        if (Math.random() < 0.5) {
+          addXP(1 + bonus);
+        } else {
+          setSlowText(
+            challengeFailEl,
+            "Medium mode: you clicked, but the vibe gods said 'no XP'."
+          );
+        }
+        return;
+      }
+
+      if (count % 7 === 0 && count % 2 === 1) {
+        addXP(2 + bonus);
+        setSlowText(
+          challengeFailEl,
+          "Lucky combo: odd AND multiple of 7. You barely got XP."
+        );
+      } else {
+        setSlowText(
+          challengeFailEl,
+          "Hard mode: XP only on weird maths (odd multiples of 7). Good luck."
+        );
+      }
+    }
+
+    function maybeShowDistraction() {
+      const diff = getDifficulty();
+      let chance = 0.15;
+      if (diff === "medium") chance = 0.3;
+      if (diff === "hard") chance = 0.6;
+
+      if (Math.random() < chance) {
+        if (diff === "hard" && Math.random() < 0.5) {
+          setSlowText(surpriseEl, randomFrom(extraDistractionsOnHard));
+        } else {
+          setSlowText(surpriseEl, randomFrom(distractions));
+        }
+      }
+    }
+
+    function maybeRandomEvent() {
+      let chance = 0.05 + level * 0.02;
+      if (chance > 0.5) chance = 0.5;
+
+      if (Math.random() < chance) {
+        const eventFn = randomFrom(randomEvents);
+        eventFn();
+      }
+    }
+
+    function checkVibeMilestones() {
+      if (count === 10) {
+        setSlowText(
+          surpriseEl,
+          "Milestone: 10 vibes. Kavyant brain is warming up. +10 $VG (Vibes Generated) bonus."
+        );
+        earnVG(10);
+      } else if (count === 25) {
+        setSlowText(
+          surpriseEl,
+          "Milestone: 25 vibes. Brain overclocked. Extra sarcasm unlocked."
+        );
+      } else if (count === 50) {
+        setSlowText(
+          surpriseEl,
+          "Milestone: 50 vibes. You unlocked 'Serious Grinder' title."
+        );
+      }
+    }
+
+    function maybeSmartBrainEvent() {
+      if (count >= 28 && Math.random() < 0.2) {
+        setSlowText(
+          surpriseEl,
+          "Kavyant brain report: " + count + " vibes, " + vibeCoins + " $VG. Dangerously committed."
+        );
+      }
+    }
+
+    function handleClickAfterDelay() {
+      if (isGameOver || !introFinished) return;
+
+      const diff = getDifficulty();
+      const vibe = randomFrom(vibes);
+
+      const mainText =
+        diff === "hard" && Math.random() < 0.3
+          ? randomFrom(distractions)
+          : vibe;
+
+      count++;
+      earnVG(1);
+      addXPForDifficulty();
+      maybeShowDistraction();
+      maybeRandomEvent();
+      checkVibeMilestones();
+      maybeSmartBrainEvent();
+
+      setSlowText(funText, mainText);
+    }
+
+    function scheduleClick() {
+      if (clickTimeoutId !== null) clearTimeout(clickTimeoutId);
+      const delay = delayForDifficulty();
+      clickTimeoutId = setTimeout(handleClickAfterDelay, delay);
+    }
+
+    function showAngryMessage() {
+      if (isGameOver || !introFinished) return;
+
+      angryAfterDisable++;
+      shakeElement(btnVibe);
+      shakeElement(funText);
+
+      if (!mercyGiven && angryAfterDisable === 3) {
+        mercyGiven = true;
+        rewardsHardLocked = false;
+
+        rewardItems.forEach((item) => {
+          const title = item.querySelector(".reward-title")?.textContent || "";
+          const link = item.querySelector(".reward-link");
+          const lock = item.querySelector(".reward-lock");
+
+          const isGitHub = title.toLowerCase().includes("github");
+          const isYouTube =
+            title.toLowerCase().includes("youtube") ||
+            title.toLowerCase().includes("care lab");
+
+          const isHeartUpgradeItem =
+            heartUpgradeStatus && item === heartUpgradeStatus.closest(".reward-item");
+
+          if (isGitHub || isYouTube) {
+            item.classList.remove("locked");
+            if (lock && !isHeartUpgradeItem) {
+              lock.textContent = "Mercy unlocked";
+              lock.style.color = "#22c55e";
+            }
+            if (link) link.dataset.disabled = "false";
+          } else if (!isHeartUpgradeItem) {
+            item.classList.add("locked");
+            if (lock) {
+              lock.textContent = "Locked. You used up your mercy.";
+              lock.style.color = "#f97316";
+            }
+            if (link) link.dataset.disabled = "true";
+          }
+        });
+
+        setSlowText(
+          surpriseEl,
+          "Fine. You clearly won’t stop. I’ll give you ONE open: GitHub and the Care Lab Studio channel."
+        );
+        setSlowText(
+          challengeFailEl,
+          "Everything else stays locked unless you Reset or level up."
+        );
+        shakeElement(document.querySelector(".rewards-panel"));
+        return;
+      }
+
+      if (angryAfterDisable >= 6) {
+        setSlowText(
+          surpriseEl,
+          "The game is tired of being mad. Normal vibes restored (but a bit harder)."
+        );
+        setSlowText(
+          challengeFailEl,
+          "You survived the tantrum. Generate now works again like normal."
+        );
+        angryAfterDisable = 0;
+        scheduleClick();
+        return;
+      }
+
+      if (angryAfterDisable === 1) {
+        setSlowText(
+          surpriseEl,
+          "Rage Quit is disabled. You had your chance."
+        );
+        setSlowText(
+          challengeFailEl,
+          "Clicking harder won’t bring shortcuts back. (Reset is always safe.)"
+        );
+      } else if (angryAfterDisable === 2) {
+        setSlowText(
+          surpriseEl,
+          "Still trying? That button is not coming back."
+        );
+        setSlowText(
+          challengeFailEl,
+          "At this point you’re speed‑running bad decisions. Reset is right there."
+        );
+      } else if (angryAfterDisable === 4 || angryAfterDisable === 5) {
+        setSlowText(
+          surpriseEl,
+          "Okay, you’re stubborn. Respect."
+        );
+        setSlowText(
+          challengeFailEl,
+          "Keep going a bit more and the game might give up on being evil."
+        );
+      } else {
+        setSlowText(
+          surpriseEl,
+          "The game can be petty, but only for so long."
+        );
+        setSlowText(
+          challengeFailEl,
+          "You’re close to breaking it. Either Reset or keep clicking."
+        );
+      }
+    }
+
+    btnVibe.addEventListener("click", () => {
+      if (!introFinished) {
+        setSlowText(
+          challengeFailEl,
+          "Press 'Start the experiment' first, scientist."
+        );
+        return;
+      }
+
+      if (isGameOver) {
+        setSlowText(
+          challengeFailEl,
+          "GAME OVER. No more vibes. Press Reset to revive your hearts."
+        );
+        return;
+      }
+
+      markUserActive();
+
+      if (btnEscape.disabled && !allUnlocked) {
+        showAngryMessage();
+        return;
+      }
+
+      if (allUnlocked) {
+        setSlowText(
+          challengeFailEl,
+          "You already rage‑quit and unlocked everything. Now you're just clicking for drama."
+        );
+        return;
+      }
+
+      setSlowText(challengeFailEl, "");
+      scheduleClick();
+    });
+
+    btnReset.addEventListener("click", () => {
+      if (clickTimeoutId !== null) clearTimeout(clickTimeoutId);
+      if (idleTimeoutId !== null) clearTimeout(idleTimeoutId);
+      if (autoUnlockTimeoutId !== null) clearTimeout(autoUnlockTimeoutId);
+      if (levelTimerIntervalId !== null) clearInterval(levelTimerIntervalId);
+      if (passiveIntervalId) {
+        clearInterval(passiveIntervalId);
+        passiveIntervalId = null;
+      }
+
+      funText.classList.remove("shake");
+      btnVibe.classList.remove("shake");
+      document.body.classList.remove("glitch");
+
+      funText.textContent =
+        "Hard reset complete. You are officially unstuck. Click Generate to start again.";
+
+      count = 0;
+      level = 1;
+      xp = 0;
+      xpMax = 5;
+      allUnlocked = false;
+      lagSpikeNextClick = false;
+      surpriseEl.textContent = "";
+      challengeFailEl.textContent = "";
+      btnEscape.disabled = false;
+      angryAfterDisable = 0;
+      rewardsHardLocked = false;
+      mercyGiven = false;
+      secretBuffer = "";
+      secretUsed = false;
+      isGameOver = false;
+
+      hearts = 4;
+      heartUpgradeLevel = 0;
+
+      // reset upgrades but keep $VG
+      timeLevel = 0;
+      xpBoostLevel = 0;
+      passiveLevel = 0;
+      shields = 0;
+      proUnlocked = false;
+      levelTimeMax = 20;
+
+      updateHeartsUI();
+      updateTimeUpgradeText();
+      updateXPUpgradeText();
+      updatePassiveUpgradeText();
+      updateShieldUpgradeText();
+      updateProUpgradeText();
+      updateTitleByLevel();
+
+      levelTimeLeft = levelTimeMax;
+      updateLevelTimerUI();
+
+      // keep $VG across runs
+      updateVGUI();
+
+      updateUI();
+      startIdleTimer();
+      startLevelTimer();
+    });
+
+    btnEscape.addEventListener("click", () => {
+      if (!introFinished) {
+        setSlowText(
+          challengeFailEl,
+          "You can't rage quit a game you never started. Hit Start first."
+        );
+        return;
+      }
+
+      if (isGameOver) {
+        setSlowText(
+          challengeFailEl,
+          "You’re already in GAME OVER. Reset to play again."
+        );
+        return;
+      }
+
+      markUserActive();
+
+      // Hard block if Rage Quit was already used in this tab before
+      if (rageQuitUsedEver) {
+        setSlowText(
+          surpriseEl,
+          "Rage Quit is permanently disabled for this tab. Aura Lab remembered what you did."
+        );
+        setSlowText(
+          challengeFailEl,
+          "Close the tab or use another browser if you want a fresh reputation."
+        );
+        btnEscape.disabled = true;
+        return;
+      }
+
+      if (btnEscape.disabled) {
+        setSlowText(
+          challengeFailEl,
+          "No more shortcuts. You waited too long. Reset is your way out."
+        );
+        return;
+      }
+
+      if (allUnlocked) {
+        setSlowText(
+          surpriseEl,
+          "You already rage‑quit once this run. Aura Lab is still disappointed, by the way."
+        );
+        setSlowText(
+          challengeFailEl,
+          "At this point you're just clicking buttons to feel something."
+        );
+        return;
+      }
+
+      // First time Rage Quit in this tab
+      rageQuitUsedEver = true;
+      allUnlocked = true;
+
+      setSlowText(
+        surpriseEl,
+        "Wow. You actually hit 'Rage Quit'. Aura Lab genuinely thought you'd hold on a bit longer."
+      );
+      setSlowText(
+        challengeFailEl,
+        "You didn’t lose the game, you just retired early. Very brave. Or very lazy."
+      );
+
+      setTimeout(() => {
+        setSlowText(
+          surpriseEl,
+          "Alright, that was harsh. Sorry. You did survive longer than most tutorials."
+        );
+        setSlowText(
+          challengeFailEl,
+          "Fine. You want the rewards? Take them."
+        );
+        updateRewards();
+      }, 2200);
+
+      setTimeout(() => {
+        setSlowText(
+          surpriseEl,
+          "There. Everything's unlocked. Happy now? Rage Quit won't work again in this tab."
+        );
+        setSlowText(
+          challengeFailEl,
+          "If you actually have guts, hit Reset and reach Level 100 without quitting like this again."
+        );
+        btnEscape.disabled = true;
+      }, 4700);
+    });
+
+    // Extra Hearts
+    function buyExtraHeart() {
+      if (!introFinished) {
+        setSlowText(
+          challengeFailEl,
+          "Start the experiment first, then you can shop for hearts."
+        );
+        return;
+      }
+
+      if (isGameOver) {
+        setSlowText(
+          challengeFailEl,
+          "GAME OVER. You can’t shop while dead. Reset first."
+        );
+        return;
+      }
+
+      if (hearts >= maxHearts) {
+        setSlowText(
+          surpriseEl,
+          "You already own the maximum of " + maxHearts + " hearts."
+        );
+        return;
+      }
+
+      const cost = getHeartUpgradeCost();
+      if (vibeCoins < cost) {
+        setSlowText(
+          surpriseEl,
+          "You need " + cost + " $VG (Vibes Generated) for this heart. You have " + vibeCoins + "."
+        );
+        return;
+      }
+
+      vibeCoins -= cost;
+      updateVGUI();
+
+      hearts++;
+      heartUpgradeLevel++;
+      updateHeartsUI();
+
+      setSlowText(
+        surpriseEl,
+        "Upgrade bought: extra heart added. " +
+          hearts +
+          "/" +
+          maxHearts +
+          " hearts now. Next heart will cost more."
+      );
+    }
+
+    if (btnBuyHeart) {
+      btnBuyHeart.addEventListener("click", buyExtraHeart);
+    }
+
+    // Time Bender
+    function buyTimeBender() {
+      if (!introFinished) {
+        setSlowText(
+          challengeFailEl,
+          "Start the experiment first, then you can bend time."
+        );
+        return;
+      }
+      if (isGameOver) {
+        setSlowText(
+          challengeFailEl,
+          "GAME OVER. Time Bender cannot save this timeline. Reset first."
+        );
+        return;
+      }
+      if (level < 3) {
+        setSlowText(
+          surpriseEl,
+          "Reach Level 3 to unlock Time Bender."
+        );
+        return;
+      }
+      const maxLevel = 3;
+      if (timeLevel >= maxLevel) {
+        setSlowText(
+          surpriseEl,
+          "Time Bender is already maxed. No more seconds to steal."
+        );
+        return;
+      }
+      const cost = getTimeCost();
+      if (vibeCoins < cost) {
+        setSlowText(
+          surpriseEl,
+          "You need " + cost + " $VG for this upgrade. You have " + vibeCoins + "."
+        );
+        return;
+      }
+      vibeCoins -= cost;
+      updateVGUI();
+      timeLevel++;
+
+      if (timeLevel === 1) levelTimeMax = 22;
+      else if (timeLevel === 2) levelTimeMax = 25;
+      else if (timeLevel === 3) levelTimeMax = 28;
+
+      setSlowText(
+        surpriseEl,
+        "Time Bender upgraded. Timer stretched. You have a little more breathing room."
+      );
+      updateTimeUpgradeText();
+      startLevelTimer();
+    }
+
+    if (btnBuyTime) {
+      btnBuyTime.addEventListener("click", buyTimeBender);
+    }
+
+    // Brain Overclock
+    function buyXPBoost() {
+      if (!introFinished) {
+        setSlowText(
+          challengeFailEl,
+          "Start the experiment first, then you can overclock your brain."
+        );
+        return;
+      }
+      if (isGameOver) {
+        setSlowText(
+          challengeFailEl,
+          "GAME OVER. Brain Overclock cannot revive you. Reset first."
+        );
+        return;
+      }
+      if (level < 5) {
+        setSlowText(
+          surpriseEl,
+          "Reach Level 5 to unlock Brain Overclock."
+        );
+        return;
+      }
+      if (xpBoostLevel >= xpBoostMax) {
+        setSlowText(
+          surpriseEl,
+          "Brain Overclock is maxed. Your brain is already sizzling."
+        );
+        return;
+      }
+      const cost = getXPBoostCost();
+      if (vibeCoins < cost) {
+        setSlowText(
+          surpriseEl,
+          "You need " + cost + " $VG for Brain Overclock. You have " + vibeCoins + "."
+        );
+        return;
+      }
+      vibeCoins -= cost;
+      updateVGUI();
+      xpBoostLevel++;
+
+      setSlowText(
+        surpriseEl,
+        "Brain Overclock upgraded. XP per click feels a bit stronger now."
+      );
+      updateXPUpgradeText();
+    }
+
+    if (btnBuyXP) {
+      btnBuyXP.addEventListener("click", buyXPBoost);
+    }
+
+    // Background Vibes
+    function ensurePassiveIncome() {
+      if (passiveIntervalId) {
+        clearInterval(passiveIntervalId);
+        passiveIntervalId = null;
+      }
+      if (passiveLevel <= 0 || isGameOver || !introFinished) return;
+
+      passiveIntervalId = setInterval(() => {
+        if (isGameOver || !introFinished) return;
+        earnVG(passiveLevel);
+      }, 1000);
+    }
+
+    function buyPassive() {
+      if (!introFinished) {
+        setSlowText(
+          challengeFailEl,
+          "Start the experiment first, then you can hire Background Vibes."
+        );
+        return;
+      }
+      if (isGameOver) {
+        setSlowText(
+          challengeFailEl,
+          "GAME OVER. Passive $VG cannot help a dead run. Reset first."
+        );
+        return;
+      }
+      if (level < 8 && totalVGEarned < 200) {
+        setSlowText(
+          surpriseEl,
+          "Reach Level 8 or earn 200 total $VG to unlock Background Vibes."
+        );
+        return;
+      }
+      if (passiveLevel >= passiveMax) {
+        setSlowText(
+          surpriseEl,
+          "Background Vibes maxed. Your $VG farm is fully automated."
+        );
+        return;
+      }
+      const cost = getPassiveCost();
+      if (vibeCoins < cost) {
+        setSlowText(
+          surpriseEl,
+          "You need " + cost + " $VG for Background Vibes. You have " + vibeCoins + "."
+        );
+        return;
+      }
+      vibeCoins -= cost;
+      updateVGUI();
+      passiveLevel++;
+
+      setSlowText(
+        surpriseEl,
+        "Background Vibes upgraded. +" + passiveLevel + " $VG per second now."
+      );
+      updatePassiveUpgradeText();
+      ensurePassiveIncome();
+    }
+
+    if (btnBuyPassive) {
+      btnBuyPassive.addEventListener("click", buyPassive);
+    }
+
+    // Heart Shield
+    function buyShield() {
+      if (!introFinished) {
+        setSlowText(
+          challengeFailEl,
+          "Start the experiment first, then you can buy shields."
+        );
+        return;
+      }
+      if (isGameOver) {
+        setSlowText(
+          challengeFailEl,
+          "GAME OVER. Shields are not retroactive. Reset first."
+        );
+        return;
+      }
+      if (level < 4) {
+        setSlowText(
+          surpriseEl,
+          "Reach Level 4 to unlock Heart Shields."
+        );
+        return;
+      }
+      const cost = getShieldCost();
+      if (vibeCoins < cost) {
+        setSlowText(
+          surpriseEl,
+          "You need " + cost + " $VG for a Heart Shield. You have " + vibeCoins + "."
+        );
+        return;
+      }
+      vibeCoins -= cost;
+      updateVGUI();
+      shields++;
+
+      setSlowText(
+        surpriseEl,
+        "Heart Shield bought. It will block the next heart loss. Shields: " + shields + "."
+      );
+      updateShieldUpgradeText();
+    }
+
+    if (btnBuyShield) {
+      btnBuyShield.addEventListener("click", buyShield);
+    }
+
+    // Pro Aura Lab
+    function buyProAura() {
+      if (!introFinished) {
+        setSlowText(
+          challengeFailEl,
+          "Start the experiment first, then you can unlock Pro Aura Lab."
+        );
+        return;
+      }
+      if (isGameOver) {
+        setSlowText(
+          challengeFailEl,
+          "GAME OVER. Pro Aura Lab only applies to living runs. Reset first."
+        );
+        return;
+      }
+      if (proUnlocked) {
+        setSlowText(
+          surpriseEl,
+          "Pro Aura Lab is already active. Flex responsibly."
+        );
+        return;
+      }
+      if (level < 4) {
+        setSlowText(
+          surpriseEl,
+          "Reach Level 4 to unlock Pro Aura Lab."
+        );
+        return;
+      }
+      if (vibeCoins < proCost) {
+        setSlowText(
+          surpriseEl,
+          "Pro Aura Lab costs " + proCost + " $VG. You have " + vibeCoins + "."
+        );
+        return;
+      }
+
+      vibeCoins -= proCost;
+      updateVGUI();
+      proUnlocked = true;
+
+      levelTimeMax += 2;
+      xpBoostLevel++;
+      updateXPUpgradeText();
+      updateTimeUpgradeText();
+
+      if (subtitleEl) {
+        subtitleEl.textContent =
+          "PRO MODE · Hearts, timers, $VG, and chaos. You paid 600 $VG for this pain.";
+      }
+
+      setSlowText(
+        surpriseEl,
+        "Pro Aura Lab unlocked. Timer slightly longer and XP feels stronger."
+      );
+      updateProUpgradeText();
+      startLevelTimer();
+    }
+
+    if (btnBuyPro) {
+      btnBuyPro.addEventListener("click", buyProAura);
+    }
+
+    // Secret keyboard easter egg: type AURA
+    document.addEventListener("keydown", (e) => {
+      if (isGameOver || !introFinished) return;
+
+      const key = e.key.toUpperCase();
+      if (key.length !== 1 || !/[A-Z]/.test(key)) return;
+
+      if (secretTimeoutId) clearTimeout(secretTimeoutId);
+      secretTimeoutId = setTimeout(() => {
+        secretBuffer = "";
+      }, 1200);
+
+      secretBuffer += key;
+      if (secretBuffer.length > SECRET_CODE.length) {
+        secretBuffer = secretBuffer.slice(-SECRET_CODE.length);
+      }
+
+      if (!secretUsed && secretBuffer === SECRET_CODE) {
+        secretUsed = true;
+        allUnlocked = true;
+        rewardsHardLocked = false;
+        mercyGiven = false;
+        btnEscape.disabled = false;
+        updateRewards();
+        setSlowText(
+          surpriseEl,
+          "You found the secret code. Aura Lab grudgingly unlocks everything."
+        );
+        setSlowText(
+          challengeFailEl,
+          "Enjoy it. Next time, try skill instead of cheat codes."
+        );
+        shakeElement(document.querySelector(".rewards-panel"));
+      }
+    });
+
+    // Intro start
+    btnIntroStart.addEventListener("click", () => {
+      introFinished = true;
+      introScreen.classList.add("overlay-hidden");
+      setSlowText(
+        surpriseEl,
+        "Experiment started. Aura Lab is now watching your every click."
+      );
+      startIdleTimer();
+      startLevelTimer();
+      ensurePassiveIncome();
+    });
+
+    // Credits reset
+    btnCreditsReset.addEventListener("click", () => {
+      creditsScreen.classList.add("overlay-hidden");
+      btnReset.click();
+    });
+
+    function showCreditsScreen() {
+      creditsScreen.classList.remove("overlay-hidden");
+    }
+
+    updateUI();
+    updateHeartsUI();
+    updateVGUI();
+  </script>
+</body>
+</html>
