@@ -100,6 +100,12 @@ Aura Lab remembers more than you think.
 - Mobile-friendly layout and controls.  
 - Online leaderboards for max level or total vibes.
 
+## 🌐 Demo
+
+You can try Nexura OS right now by opening the `Nexura OS.html` file in your browser, or by hosting it on any static server (GitHub Pages, Netlify, etc.).Copy it and paste to website  url
+
+https://hcodx.com/vs-editor?project=p_mr1u1k2o_3z0iv1
+---
 ## Links
 
 - Aura Lab: Cares & Laughs 2 – [CodePen](https://codepen.io/Kavyant-Kumar/pen/dPOXwmY)  
