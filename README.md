@@ -2,6 +2,12 @@
 
 Tiny browser lab experiment where your brain farms vibes while the game quietly turns more evil.
 
+**ScreenShort**
+
+<img width="1920" height="924" alt="Screenshot 2026-07-07 155735" src="https://github.com/user-attachments/assets/81974200-17e9-4a30-984a-f8ca88ef7d21" />
+<img width="1920" height="923" alt="Screenshot 2026-07-07 155715" src="https://github.com/user-attachments/assets/5911a14f-827c-4a2b-ae66-c85d1d170301" />
+<img width="1919" height="918" alt="Screenshot 2026-07-07 155656" src="https://github.com/user-attachments/assets/72716c0f-b58c-47e2-ae0c-cc0d288ffb4e" />
+
 ## Overview
 
 Aura Lab: Cares & Laughs 0 is a clicker-style web game where you generate **$VG (Vibes Generated)**, level up, and try not to lose all your hearts while the difficulty auto-scales from cozy to cruel.  
